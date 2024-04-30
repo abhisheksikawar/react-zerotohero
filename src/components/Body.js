@@ -27,24 +27,25 @@ const Body=()=>{
     }
 
     return restaurantList.length===0?<Shimmer/>:(
-        <div className="body">
-            <div className="search">
-                <input type="text" value={searchValue} onChange={(e)=>{
+        <div className="">
+            <div className="mx-20 my-16 flex">
+                <input className="ml-20 mr-4 appearance-none block w-9/12 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Search for restaurants and food" type="text" value={searchValue} onChange={(e)=>{
                     setSerchValue(e.target.value);
 
                 }}/>
-                <button onClick={()=>{
+                <button className="inline-flex items-center px-10 text-lg font-medium text-center text-white bg-[#f5502f] rounded-lg hover:bg-[#D63922]"
+                onClick={()=>{
                     console.log(restaurantList.filter(r=> r.info.name.toLowerCase().includes(searchValue.toLowerCase())));
                     setFilteredRestaurantList(restaurantList.filter(r=> r.info.name.toLowerCase().includes(searchValue.toLowerCase())))
                 }}>Search</button>
             </div>
-            <div className="top-rated-div">
-                <button className="top-rated-button" onClick={()=>{                  
+            <div className="mx-40 my-8">
+                <button className="bg-gray-200 hover:bg-[#f5502f] text-gray-700 hover:text-white shadow-xl font-bold py-2 px-4 rounded-full" onClick={()=>{                  
                     filteredList();
                 }}>Top Rated Restaurant</button>
                 
             </div>
-            <div className="restaurant-cards">
+            <div className="flex flex-wrap mx-28 pl-8">
                 {
                     filteredRestaurantList.map(res=>
                     <Link to={"/restaurant/"+res.info.id}><RestaurantCards key={res.info.id} resData={res}/></Link>)
