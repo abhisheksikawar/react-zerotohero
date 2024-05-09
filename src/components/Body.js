@@ -1,4 +1,4 @@
-import RestaurantCards from "./RestaurantCards"
+import RestaurantCards,{withPromotedLabel} from "./RestaurantCards"
 import restaurants from "../utils/MockData"
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
@@ -15,6 +15,8 @@ const Body=()=>{
         setRestaurantList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestaurantList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
+
+    const RestaurantCardPromoted=withPromotedLabel(RestaurantCards);
 
     let [restaurantList,setRestaurantList]=useState([]);
     const [filteredRestaurantList,setFilteredRestaurantList]=useState([]);
@@ -48,7 +50,9 @@ const Body=()=>{
             <div className="flex flex-wrap mx-28 pl-8">
                 {
                     filteredRestaurantList.map(res=>
-                    <Link to={"/restaurant/"+res.info.id}><RestaurantCards key={res.info.id} resData={res}/></Link>)
+                    <Link to={"/restaurant/"+res.info.id}>
+                        {res.info.avgRating>4.5?<RestaurantCardPromoted key={res.info.id} resData={res}/>:<RestaurantCards key={res.info.id} resData={res}/>}
+                        </Link>)
                 }
 
             </div>

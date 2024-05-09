@@ -1,11 +1,13 @@
 import { APP_LOGO_URL } from "../utils/Constants"
-import {useState} from "react";
+import {useContext, useState} from "react";
 import { Link } from "react-router-dom";
 import useUserStatus from "../utils/useUserStatus";
+import UserContext from "../utils/UserContext";
 const Header=()=>{
     const [loginButton,setLoginButton]=useState("login");
 
     const status=useUserStatus();
+    const {loggedInUser}=useContext(UserContext)
    
     return <div className="flex justify-between items-center p-2 shadow-lg">
         <div className="w-20">
@@ -26,6 +28,7 @@ const Header=()=>{
                          setLoginButton("login")
                         }
                 }} >{loginButton}</button>
+                <li className="px-6" >{loggedInUser}</li>
             </ul>
         </div>
 
