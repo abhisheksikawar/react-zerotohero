@@ -3,11 +3,14 @@ import {useContext, useState} from "react";
 import { Link } from "react-router-dom";
 import useUserStatus from "../utils/useUserStatus";
 import UserContext from "../utils/UserContext";
+import {useSelector} from "react-redux"
 const Header=()=>{
     const [loginButton,setLoginButton]=useState("login");
 
     const status=useUserStatus();
     const {loggedInUser}=useContext(UserContext)
+    const cartItems = useSelector((store) => store.cart.items);
+    console.log(cartItems);
    
     return <div className="flex justify-between items-center p-2 shadow-lg">
         <div className="w-20">
@@ -20,7 +23,7 @@ const Header=()=>{
                 <li className="px-6" ><Link to="/about">About Us</Link></li>
                 <li className="px-6" ><Link to="/contact">Contact Us</Link></li>
                 <li className="px-6" ><Link to="/grocery">Grocery</Link></li>
-                <li className="px-6" >Cart</li>
+                <li className="px-6" ><Link to="/cart">Cart({cartItems.length})</Link></li>
                 <button className="px-6" onClick={()=>{
                      if(loginButton==="login"){
                          setLoginButton("logout");

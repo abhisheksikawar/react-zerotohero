@@ -16,7 +16,7 @@ const RestaurantCategory=(props)=>{
             </svg>
         </div>
         <div className="bg-white">
-            {(showItems) && <ItemList data={items}/>}
+            {(showItems) && <ItemList data={items.card.card.itemCards}/>}
         </div>
         
              
